@@ -1,0 +1,30 @@
+
+
+<nav>
+  <ul>
+    <li><a href="/">Terug naar home</a></li>
+	</ul>
+</nav>
+
+  <form action="/new" method="post">
+		<% if(locals.error !== undefined){ %>
+			<p class="message"><%= error %></p>
+		<% } %>
+		<fieldset>
+			<legend><span>1</span> Verplichte waardes</legend>
+				<label for="squads">Select website</label>
+				
+				<select required name="website id="website">
+                    <% websites.forEach(website => { %>
+                        <option value="<%= website.id %>"><%= website.titel %></option>
+                        <% }) %>
+				</select>
+  
+				<label for="url">url:</label>
+				<input required type="text" name="url" id="url" placeholder="..." value="<%= locals.values?.url ?? '' %>" />
+		</fieldset>
+
+	
+
+			
+  </form>

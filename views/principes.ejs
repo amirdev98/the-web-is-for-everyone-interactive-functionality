@@ -1,0 +1,12 @@
+<h1>Vervoerregio Checklist</h1>
+
+<% principes.forEach(principe => { %>
+    <h2><%= principe.index %> <%= principe.titel %></h2>
+    <p><%- principe.beschrijving.html %></p>
+    <% principe.richtlijnen.forEach(richtlijn => { %>
+        <h3><%= richtlijn.index %> <%= richtlijn.titel %></h3>
+        <% richtlijn.succescriteria.forEach(succescriterium => { %>
+            <h4><%= succescriterium.index %> <%= succescriterium.titel %></h4>
+        <% }) %>
+    <% }) %>
+<% }) %>
