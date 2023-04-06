@@ -1,11 +1,8 @@
-
-
 <nav>
   <ul>
     <li><a href="/">Terug naar home</a></li>
 	</ul>
 </nav>
-
   <form action="/new" method="post">
 		<% if(locals.error !== undefined){ %>
 			<p class="message"><%= error %></p>
@@ -22,9 +19,5 @@
   
 				<label for="url">url:</label>
 				<input required type="text" name="url" id="url" placeholder="..." value="<%= locals.values?.url ?? '' %>" />
-		</fieldset>
-
-	
-
-			
+		</fieldset>	
   </form>

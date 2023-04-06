@@ -4,6 +4,22 @@
     <% }) %>
 </ul>
 
-<form>.... TODO voor Amir :)</form> bn
+<form action="/new" method="post">
+    <% if(locals.error !== undefined){ %>
+        <p class="message"><%= error %></p>
+    <% } %>
+    <fieldset>
+        <legend><span>1</span> Verplichte waardes</legend>
+            <label for="websites">Select website</label>
+            
+            <select required name="websiteId" id="website">
+                <% websites.forEach(website => { %>
+                    <option value="<%= website.id %>"><%= website.titel %></option>
+                    <% }) %>
+            </select>
 
-(Succes!)
+            <label for="url">url:</label>
+            <input required type="text" name="url" id="url" placeholder="..." value="<%= locals.values?.url ?? '' %>" />
+            <input type="submit">
+    </fieldset>	
+</form>

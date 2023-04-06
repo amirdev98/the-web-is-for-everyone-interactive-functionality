@@ -3,6 +3,7 @@ import express from 'express'
 
 //maak een nieuwe express app
 const server = express()
+const host = '10.10.209.49'
 
 //public map gebruiken
 server.use(express.static('public'))
@@ -29,12 +30,27 @@ server.get('/principes', (req, res) => {
 
 server.get('/urls', (req, res) => { 
     let url = `https://api.vervoerregio-amsterdam.fdnd.nl/api/v1/urls?first=20`
-    fetchJson(url).then((data) => {
-        res.render('urls', data)
+    fetchJson(url).then((urlsData) => {
+        let websites = `https://api.vervoerregio-amsterdam.fdnd.nl/api/v1/websites?first=20`
+        fetchJson(websites).then((websitesData) => {
+            res.render('urls', {
+              urls: urlsData.urls,
+              websites: websitesData.websites
+            })
+        })
+    })
+})
+
+server.post("/new", (req, res) => {
+    let url = `https://api.vervoerregio-amsterdam.fdnd.nl/api/v1/urls`
+
+    postJson(url, req.body).then((data) => {
+        res.redirect('/urls')
     })
 })
 
 server.get('/form', (req, res) => {
+    res.render('form')
     
 })
 
@@ -46,6 +62,8 @@ server.set('port', 8000)
 //start de server
 server.listen(server.get('port'), () => {
   console.log(`Application started on http://localhost:${server.get('port')}`)
+
+  console.log(`Application started on network http://${host}:${server.get('port')}`)
 })
 /**
  * Wraps the fetch api and returns the response body parsed through json
