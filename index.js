@@ -1,70 +1,68 @@
-//import express en dotenv 
-import express from 'express'
+//import express en dotenv
+import express from "express";
 
 //maak een nieuwe express app
-const server = express()
-const host = '10.10.209.49'
+const server = express();
+const host = "10.10.209.49";
 
 //public map gebruiken
-server.use(express.static('public'))
-
+// server.use(express.static('public','partials'))
+server.use(express.static("public"));
 //stel de views in
-server.set('view engine', 'ejs')
-server.set('views', './views')
+server.set("view engine", "ejs");
+server.set("views", "./views");
 
 // Stel afhandeling van formulieren in
-server.use(express.json())
-server.use(express.urlencoded({ extended: true }))
+server.use(express.json());
+server.use(express.urlencoded({ extended: true }));
 
-server.get('/', (req, res) => {
-    res.render('index')
-})
+server.get("/", (req, res) => {
+  res.render("index");
+});
 
 //hier komen de routes
-server.get('/principes', (req, res) => { 
-    let url = `https://api.vervoerregio-amsterdam.fdnd.nl/api/v1/principes`    
-    fetchJson(url).then((data) => {
-        res.render('principes', data)
-    })
-})
+server.get("/principes", (req, res) => {
+  let url = `https://api.vervoerregio-amsterdam.fdnd.nl/api/v1/principes`;
+  fetchJson(url).then((data) => {
+    res.render("principes", data);
+  });
+});
 
-server.get('/urls', (req, res) => { 
-    let url = `https://api.vervoerregio-amsterdam.fdnd.nl/api/v1/urls?first=20`
-    fetchJson(url).then((urlsData) => {
-        let websites = `https://api.vervoerregio-amsterdam.fdnd.nl/api/v1/websites?first=20`
-        fetchJson(websites).then((websitesData) => {
-            res.render('urls', {
-              urls: urlsData.urls,
-              websites: websitesData.websites
-            })
-        })
-    })
+server.get("/urls", (req, res) => {
+  let url = `https://api.vervoerregio-amsterdam.fdnd.nl/api/v1/urls?first=20`;
+  fetchJson(url).then((urlsData) => {
+    let websites = `https://api.vervoerregio-amsterdam.fdnd.nl/api/v1/websites?first=20`;
+    fetchJson(websites).then((websitesData) => {
+      res.render("urls", {
+        urls: urlsData.urls,
+        websites: websitesData.websites,
+      });
+    });
+  });
+});
+server.get('/contacts', (req, res) => {
+  res.render('contacts')
 })
 
 server.post("/new", (req, res) => {
-    let url = `https://api.vervoerregio-amsterdam.fdnd.nl/api/v1/urls`
+  let url = `https://api.vervoerregio-amsterdam.fdnd.nl/api/v1/urls`;
 
-    postJson(url, req.body).then((data) => {
-        res.redirect('/urls')
-    })
-})
-
-server.get('/form', (req, res) => {
-    res.render('form')
-    
-})
-
-
+  postJson(url, req.body).then((data) => {
+    res.redirect("/urls");
+  });
+});
 
 //poortnummer instellen
-server.set('port', 8000)
+server.set("port", 8000);
 
 //start de server
-server.listen(server.get('port'), () => {
-  console.log(`Application started on http://localhost:${server.get('port')}`)
+server.listen(server.get("port"), () => {
+  console.log(`Application started on http://localhost:${server.get("port")}`);
 
-  console.log(`Application started on network http://${host}:${server.get('port')}`)
-})
+  console.log(
+    `Application started on network http://${host}:${server.get("port")}`
+  );
+});
 /**
  * Wraps the fetch api and returns the response body parsed through json
  * @param {*} url the api endpoint to address
@@ -73,7 +71,7 @@ server.listen(server.get('port'), () => {
 async function fetchJson(url) {
   return await fetch(url)
     .then((response) => response.json())
-    .catch((error) => error)
+    .catch((error) => error);
 }
 
 /**
@@ -86,10 +84,10 @@ async function fetchJson(url) {
  */
 export async function postJson(url, body) {
   return await fetch(url, {
-    method: 'post',
+    method: "post",
     body: JSON.stringify(body),
-    headers: { 'Content-Type': 'application/json' },
+    headers: { "Content-Type": "application/json" },
   })
     .then((response) => response.json())
-    .catch((error) => error)
+    .catch((error) => error);
 }

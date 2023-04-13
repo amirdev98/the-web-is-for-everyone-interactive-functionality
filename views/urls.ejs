@@ -1,25 +1,37 @@
-<ul>
-    <% urls.forEach(url => { %>
-        <li><%= url.url %></li>
-    <% }) %>
-</ul>
-
-<form action="/new" method="post">
+<%- include('./partials/head.ejs') %>
+<body>
+    
+</body>
+</html>
+<form action="/new" method="post" class="form-container">
     <% if(locals.error !== undefined){ %>
-        <p class="message"><%= error %></p>
+    <p class="message"><%= error %></p>
     <% } %>
-    <fieldset>
-        <legend><span>1</span> Verplichte waardes</legend>
-            <label for="websites">Select website</label>
-            
-            <select required name="websiteId" id="website">
-                <% websites.forEach(website => { %>
-                    <option value="<%= website.id %>"><%= website.titel %></option>
-                    <% }) %>
-            </select>
-
-            <label for="url">url:</label>
-            <input required type="text" name="url" id="url" placeholder="..." value="<%= locals.values?.url ?? '' %>" />
-            <input type="submit">
-    </fieldset>	
-</form>
+    <fieldset class="form-fieldset">
+      <legend class="form-legend">Kies de website van de organisatie</legend>
+      <div class="form-row">
+        <label for="websites" class="form-label">Website</label>
+        <select required name="websiteId" id="website" class="form-select">
+          <% websites.forEach(website => { %>
+          <option value="<%= website.id %>"><%= website.titel %></option>
+          <% }) %>
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="url" class="form-label">URL</label>
+        <input required type="text" name="url" id="url" placeholder="..." value="<%= locals.values?.url ?? '' %>" class="form-input" />
+      </div>
+      <div class="form-row">
+        <button type="submit" class="form-button">Submit</button>
+      </div>
+    </fieldset>
+    <div id="success-message">
+      <span class="success-icon">&#10003;</span>
+      <p>Your action was successful!</p>
+    </div>
+  </form>
+  <ul class="urls-list">
+    <% urls.forEach(url => { %>
+    <li class="url-item"><%= url.url %></li>
+    <% }) %>
+  </ul>

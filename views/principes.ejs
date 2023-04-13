@@ -1,12 +1,30 @@
-<h1>Vervoerregio Checklist</h1>
-
+<%- include('./partials/head.ejs') %>
+<h1>Aan de slag! Check de Vervoerregio checklist.</h1>
 <% principes.forEach(principe => { %>
-    <h2><%= principe.index %> <%= principe.titel %></h2>
-    <p><%- principe.beschrijving.html %></p>
+  <div class="principe">
+    <div class="principe__title">
+      <span class="principe__number"><%= principe.index %></span>
+      <%= principe.titel %>
+    </div>
+    <div class="principe__description">
+      <%- principe.beschrijving.html %>
+    </div>
     <% principe.richtlijnen.forEach(richtlijn => { %>
-        <h3><%= richtlijn.index %> <%= richtlijn.titel %></h3>
+      <div class="richtlijn">
+        <div class="richtlijn__title">
+          <span class="richtlijn__number"><%= richtlijn.index %></span>
+          <%= richtlijn.titel %>
+        </div>
+        <%- richtlijn.uitleg.html%>
         <% richtlijn.succescriteria.forEach(succescriterium => { %>
-            <h4><%= succescriterium.index %> <%= succescriterium.titel %></h4>
-        <% }) %>
-    <% }) %>
+          <div class="succescriterium">
+            <div class="succescriterium__title">
+              <span class="succescriterium__number"><%= succescriterium.index %></span>
+              <%= succescriterium.titel %>
+            </div>
+          </div>
+        <% })%>
+      </div>
+    <% })%>
+  </div>
 <% }) %>
