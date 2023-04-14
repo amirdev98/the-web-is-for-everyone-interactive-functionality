@@ -3,7 +3,7 @@
     
 </body>
 </html>
-<form action="/new" method="post" class="form-container">
+<form id="myForm" action="/new" method="post" class="form-container">
     <% if(locals.error !== undefined){ %>
     <p class="message"><%= error %></p>
     <% } %>
@@ -25,13 +25,10 @@
         <button type="submit" class="form-button">Submit</button>
       </div>
     </fieldset>
-    <div id="success-message">
-      <span class="success-icon">&#10003;</span>
-      <p>Your action was successful!</p>
     </div>
   </form>
   <ul class="urls-list">
     <% urls.forEach(url => { %>
-    <li class="url-item"><%= url.url %></li>
+    <li class="url-item"><a href="/principes?urlid="><%= url.url %> <%= url.id %></li></a>
     <% }) %>
-  </ul>
+    </ul>

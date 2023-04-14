@@ -1,5 +1,6 @@
 <%- include('./partials/head.ejs') %>
-<h1>Aan de slag! Check de Vervoerregio checklist.</h1>
+<h1>Chek gerust het toolboard!</h1>
+<h2>Aan de slag! Check de Vervoerregio checklist.</h2>
 <% principes.forEach(principe => { %>
   <div class="principe">
     <div class="principe__title">
@@ -15,7 +16,10 @@
           <span class="richtlijn__number"><%= richtlijn.index %></span>
           <%= richtlijn.titel %>
         </div>
-        <%- richtlijn.uitleg.html%>
+        <details>
+          <summary>Voor meer informnatie</summary>
+          <p><%- richtlijn.uitleg.html %></p>
+        </details>
         <% richtlijn.succescriteria.forEach(succescriterium => { %>
           <div class="succescriterium">
             <div class="succescriterium__title">
