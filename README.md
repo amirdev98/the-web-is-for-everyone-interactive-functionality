@@ -21,6 +21,10 @@
 <!- Bij Gebruik staat de user story, hoe het werkt en wat je er mee kan. -->
 
 ## Kenmerken
+Progressive enhancement
+Progressive enhancement is een methode om websites of applicaties te bouwen waarbij je begint met een basisversie die voor iedereen toegankelijk is en vervolgens extra functies toevoegt voor gebruikers met betere apparaten of browsers. Zo zorg je ervoor dat alle gebruikers de website kunnen gebruiken.
+
+De basisversie van de website is ontworpen om te werken op alle apparaten en browsers, ongeacht hun capaciteiten, en omvat alle essentiële inhoud en functionaliteit. Vervolgens worden er extra functies toegevoegd aan de website om de gebruikerservaring te verbeteren voor gebruikers met meer capabele apparaten of browsers, zoals animaties, geavanceerde lay-outs of interactieve functies.
 <!-- Bij Kenmerken staat welke technieken zijn gebruikt en hoe. Wat is de HTML structuur? Wat zijn de belangrijkste dingen in CSS? Wat is er met JS gedaan en hoe? Misschien heb je iets met NodeJS gedaan, of heb je een framwork of library gebruikt? -->
 
 ## Installatie
