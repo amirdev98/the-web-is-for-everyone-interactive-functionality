@@ -29,7 +29,7 @@ server.get("/principes", (req, res) => {
 });
 
 server.get("/urls", (req, res) => {
-  let url = `https://api.vervoerregio-amsterdam.fdnd.nl/api/v1/urls?first=20`;
+  let url = `https://api.vervoerregio-amsterdam.fdnd.nl/api/v1/urls?first=100`;
   fetchJson(url).then((urlsData) => {
     let websites = `https://api.vervoerregio-amsterdam.fdnd.nl/api/v1/websites?first=20`;
     fetchJson(websites).then((websitesData) => {
@@ -48,6 +48,7 @@ server.post("/new", (req, res) => {
   let url = `https://api.vervoerregio-amsterdam.fdnd.nl/api/v1/urls`;
 
   postJson(url, req.body).then((data) => {
+    console.log(data);
     res.redirect("/urls");
   });
 });

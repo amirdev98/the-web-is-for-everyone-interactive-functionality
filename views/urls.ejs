@@ -22,13 +22,19 @@
         <input required type="text" name="url" id="url" placeholder="..." value="<%= locals.values?.url ?? '' %>" class="form-input" />
       </div>
       <div class="form-row">
-        <button type="submit" class="form-button">Submit</button>
       </div>
     </fieldset>
-    </div>
+    <button id="submit-button" type="submit" class="form-button">Opslaan</button>
   </form>
+<article>
+  <h2>Click op de gekozen pagina onderaan en check of het volleidig toegankelijk is op basis van de checklist.</h2>
+</article>
   <ul class="urls-list">
     <% urls.forEach(url => { %>
     <li class="url-item"><a href="/principes?urlid="><%= url.url %> <%= url.id %></li></a>
     <% }) %>
-    </ul>
+    </ul>                         
+
+
+
+

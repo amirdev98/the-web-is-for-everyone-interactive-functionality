@@ -1,5 +1,5 @@
 :root{
-  -- #7c7aae;
+  --cool_medium_purple :#7c7aae;
 }
 /* urls style */
 body {
@@ -15,7 +15,7 @@ h1 {
   color:aliceblue;
   margin-bottom: 20px;
   padding: 20px;
-  background-color:#7c7aae;
+  background-color: var(--cool_medium_purple);
   border-radius: 10px;
   align-content: center;
 }
@@ -67,7 +67,7 @@ h1 {
   font-weight: bold;
   text-align: center;
   border-radius: 50%;
-  background-color: #f8f8f8;
+  background-color: #026d0f;
   color: #fff;
 }
 
@@ -179,19 +179,23 @@ details p {
 }
 
 .urls-list {
-  display: grid;
   margin-top: 2rem;
   list-style: none;
+  padding-inline: 0;
+
   
 }
 
 .url-item {
-align-items: center;
+  align-items: center;
   font-size: 1rem;
-  margin: 2rem;
   padding: 2rem;
   border-radius: 5px;
   background-color: #7c7aae;
+  max-width: 100%;
+  height: auto;
+  margin-block: 2rem;
+
 }
 
 /* nav styling */
@@ -203,7 +207,7 @@ nav {
   padding: 0;
 }
 
-ul {
+nav ul {
   flex-wrap: wrap;
   list-style-type: none;
   margin: 0;
@@ -212,7 +216,7 @@ ul {
   justify-content: space-between;
 }
 
-li {
+nav li {
   flex-grow: 1;
   text-align: center;
 }
@@ -228,9 +232,12 @@ a:hover {
   background-color: #444;
 }
 
-
 /* head */
-header img{
-  max-width: 100%;
+.a-header-img{
+  max-width:100%;
+  height: auto;
+}
+.b-header-img{
+  max-width:100%;
   height: auto;
 }
