@@ -1,11 +1,11 @@
-// importeer express en dotenv
+// importeer express
 import express from "express";
 
 // maak een nieuwe express app
 const server = express();
 const host = "10.10.209.49";
 
-// Gebruik de public map als bron voor de statische bestanden (CSS, JS, afbeeldingen, enz.)
+// Gebruik de public map als bron voor de statische bestanden
 server.use(express.static("public"));
 
 // Stel de view engine in als EJS
@@ -18,7 +18,7 @@ server.set("views", "./views");
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 
-// Definieer de hoofdroute
+// Definieer de hoofdpagina route
 server.get("/", (req, res) => {
   res.render("index"); // toon de index-pagina
 });
@@ -73,12 +73,30 @@ server.listen(server.get("port"), () => {
 });
 
 /**
- * Wrapper-functie voor het fetchen van JSON-data van een externe API
- * @param {*} url - de URL van de API waarvan gegevens worden opgehaald
- * @returns een Promise die de JSON-data van de API bevat
+ * Wraps the fetch api and returns the response body parsed through json
+ * @param {*} url the api endpoint to address
+ * @returns the json response from the api endpoint
  */
-async function fetchJson(url) {
+ async function fetchJson(url) {
   return await fetch(url)
+    .then((response) => response.json())
+    .catch((error) => error);
+}
+
+/**
+ * postJson() is a wrapper for the experimental node fetch api. It fetches the url
+ * passed as a parameter using the POST method and the value from the body paramater
+ * as a payload. It returns the response body parsed through json.
+ * @param {*} url the api endpoint to address
+ * @param {*} body the payload to send along
+ * @returns the json response from the api endpoint
+ */
+export async function postJson(url, body) {
+  return await fetch(url, {
+    method: "post",
+    body: JSON.stringify(body),
+    headers: { "Content-Type": "application/json" },
+  })
     .then((response) => response.json())
     .catch((error) => error);
 }
