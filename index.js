@@ -1,35 +1,43 @@
-//import express en dotenv
+// importeer express en dotenv
 import express from "express";
 
-//maak een nieuwe express app
+// maak een nieuwe express app
 const server = express();
 const host = "10.10.209.49";
 
-//public map gebruiken
-// server.use(express.static('public','partials'))
+// Gebruik de public map als bron voor de statische bestanden (CSS, JS, afbeeldingen, enz.)
 server.use(express.static("public"));
-//stel de views in
+
+// Stel de view engine in als EJS
 server.set("view engine", "ejs");
+
+// Stel de map voor views in
 server.set("views", "./views");
 
-// Stel afhandeling van formulieren in
+// Stel de afhandeling van formulieren in
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 
+// Definieer de hoofdroute
 server.get("/", (req, res) => {
-  res.render("index");
+  res.render("index"); // toon de index-pagina
 });
 
-//hier komen de routes
+// Definieer de /principes route
 server.get("/principes", (req, res) => {
   let url = `https://api.vervoerregio-amsterdam.fdnd.nl/api/v1/principes`;
+
+  // haal data op van de externe API en render de "principes" pagina met de data
   fetchJson(url).then((data) => {
     res.render("principes", data);
   });
 });
 
+// Definieer de /urls route
 server.get("/urls", (req, res) => {
   let url = `https://api.vervoerregio-amsterdam.fdnd.nl/api/v1/urls?first=100`;
+
+  // haal data op van de externe API en render de "urls" pagina met de data
   fetchJson(url).then((urlsData) => {
     let websites = `https://api.vervoerregio-amsterdam.fdnd.nl/api/v1/websites?first=20`;
     fetchJson(websites).then((websitesData) => {
@@ -40,23 +48,22 @@ server.get("/urls", (req, res) => {
     });
   });
 });
-server.get('/contacts', (req, res) => {
-  res.render('contacts')
-})
 
+// Definieer de /new route
 server.post("/new", (req, res) => {
   let url = `https://api.vervoerregio-amsterdam.fdnd.nl/api/v1/urls`;
 
+  // stuur gegevens naar de externe API om nieuwe data te maken
   postJson(url, req.body).then((data) => {
     console.log(data);
-    res.redirect("/urls");
+    res.redirect("/urls"); // leidt de gebruiker door naar de urls-pagina
   });
 });
 
-//poortnummer instellen
+// Stel de poort in op 8000
 server.set("port", 8000);
 
-//start de server
+// Start de server op de opgegeven poort en host
 server.listen(server.get("port"), () => {
   console.log(`Application started on http://localhost:${server.get("port")}`);
 
@@ -64,31 +71,14 @@ server.listen(server.get("port"), () => {
     `Application started on network http://${host}:${server.get("port")}`
   );
 });
+
 /**
- * Wraps the fetch api and returns the response body parsed through json
- * @param {*} url the api endpoint to address
- * @returns the json response from the api endpoint
+ * Wrapper-functie voor het fetchen van JSON-data van een externe API
+ * @param {*} url - de URL van de API waarvan gegevens worden opgehaald
+ * @returns een Promise die de JSON-data van de API bevat
  */
 async function fetchJson(url) {
   return await fetch(url)
-    .then((response) => response.json())
-    .catch((error) => error);
-}
-
-/**
- * postJson() is a wrapper for the experimental node fetch api. It fetches the url
- * passed as a parameter using the POST method and the value from the body paramater
- * as a payload. It returns the response body parsed through json.
- * @param {*} url the api endpoint to address
- * @param {*} body the payload to send along
- * @returns the json response from the api endpoint
- */
-export async function postJson(url, body) {
-  return await fetch(url, {
-    method: "post",
-    body: JSON.stringify(body),
-    headers: { "Content-Type": "application/json" },
-  })
     .then((response) => response.json())
     .catch((error) => error);
 }
