@@ -1,8 +1,4 @@
 <%- include('./partials/head.ejs') %>
-<body>
-    
-</body>
-</html>
 <form id="myForm" action="/new" method="post" class="form-container">
     <% if(locals.error !== undefined){ %>
     <p class="message"><%= error %></p>
@@ -34,7 +30,7 @@
     <li class="url-item"><a href="/principes?urlid="><%= url.url %> <%= url.id %></li></a>
     <% }) %>
     </ul>                         
-
+    <%- include('./partials/foot.ejs') %>
 
 
 
