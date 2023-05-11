@@ -6,7 +6,7 @@
     <fieldset class="form-fieldset">
       <legend class="form-legend">Kies de website van de organisatie</legend>
       <div class="form-row">
-        <label for="websites" class="form-label">Website</label>
+        <label for="websites" class="form-label">Website:</label>
         <select required name="websiteId" id="website" class="form-select">
           <% websites.forEach(website => { %>
           <option value="<%= website.id %>"><%= website.titel %></option>
